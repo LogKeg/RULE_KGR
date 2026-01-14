@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tóm tắt cách tính điểm IKLC</title>
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --card: #ffffff;
+      --text: #1c1c1c;
+      --muted: #5a5a5a;
+      --accent: #1f6b5c;
+      --line: #e2ded6;
+    }
+    body {
+      margin: 0;
+      font-family: "Georgia", "Times New Roman", serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+    .wrap {
+      max-width: 980px;
+      margin: 32px auto 48px;
+      padding: 0 20px;
+    }
+    header {
+      background: var(--card);
+      padding: 24px 28px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0.2px;
+    }
+    .sub {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .section {
+      margin-top: 20px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px 24px;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      color: var(--accent);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th {
+      font-weight: 600;
+      color: var(--muted);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .note {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    .logic {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .logic-card {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+      background: #fbfaf7;
+    }
+    .logic-card strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+    footer {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>IKLC English – Tóm tắt cách tính điểm</h1>
+      <p class="sub">Nguồn: “English Kangaroo Regulations for Country Partners” (trang 1–2). Bản tóm tắt này kiểm tra logic chấm điểm và nêu công thức tính.</p>
+    </header>
+
+    <section class="section">
+      <h2>Quy tắc chấm điểm (đã kiểm tra)</h2>
+      <div class="logic">
+        <div class="logic-card">
+          <strong>Start &amp; Story</strong>
+          Không trừ điểm khi sai. Tính điểm tất cả câu.
+        </div>
+        <div class="logic-card">
+          <strong>Joey, Wallaby, Grey, Red</strong>
+          Có 50 câu, chỉ chấm 40 câu đầu tiên mà thí sinh làm.
+        </div>
+        <div class="logic-card">
+          <strong>Điểm cộng cố định</strong>
+          +10 điểm chỉ áp dụng cho Joey/Wallaby/Grey/Red.
+        </div>
+        <div class="logic-card">
+          <strong>Thời gian</strong>
+          60 phút tính từ lúc mở đề.
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Bảng tính điểm theo cấp độ</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Cấp độ</th>
+            <th>Khối lớp</th>
+            <th>Số câu được chấm</th>
+            <th>Điểm / Đúng</th>
+            <th>Trừ / Sai</th>
+            <th>Điểm cộng</th>
+            <th>Điểm tối đa (kiểm tra)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Start (Pre-A1)</td>
+            <td>I–II</td>
+            <td>25 (tất cả)</td>
+            <td>2.00</td>
+            <td>0</td>
+            <td>Không</td>
+            <td>25 * 2 = 50</td>
+          </tr>
+          <tr>
+            <td>Story (A1)</td>
+            <td>III–IV</td>
+            <td>30 (tất cả)</td>
+            <td>2.00</td>
+            <td>0</td>
+            <td>Không</td>
+            <td>30 * 2 = 60</td>
+          </tr>
+          <tr>
+            <td>Joey (A1–A2)</td>
+            <td>V–VI</td>
+            <td>40 (40 câu làm đầu tiên)</td>
+            <td>1.00</td>
+            <td>-0.50</td>
+            <td>+10</td>
+            <td>40 * 1 + 10 = 50</td>
+          </tr>
+          <tr>
+            <td>Wallaby (A2–B1)</td>
+            <td>VII–VIII</td>
+            <td>40 (40 câu làm đầu tiên)</td>
+            <td>1.25</td>
+            <td>-0.50</td>
+            <td>+10</td>
+            <td>40 * 1.25 + 10 = 60</td>
+          </tr>
+          <tr>
+            <td>Grey (B1–B2)</td>
+            <td>IX–X</td>
+            <td>40 (40 câu làm đầu tiên)</td>
+            <td>1.50</td>
+            <td>-0.50</td>
+            <td>+10</td>
+            <td>40 * 1.5 + 10 = 70</td>
+          </tr>
+          <tr>
+            <td>Red (B2–C1)</td>
+            <td>XI–XII</td>
+            <td>40 (40 câu làm đầu tiên)</td>
+            <td>1.75</td>
+            <td>-0.50</td>
+            <td>+10</td>
+            <td>40 * 1.75 + 10 = 80</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">Kiểm tra logic: Các điểm tối đa đều đúng theo công thức (số câu chấm * điểm đúng) + điểm cộng (nếu có).</p>
+    </section>
+
+    <section class="section">
+      <h2>Giải thích dễ hiểu (kèm ví dụ)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Tình huống</th>
+            <th>Giải thích cho học sinh</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Start/Story: làm sai thì sao?</td>
+            <td>Không bị trừ điểm. Ví dụ: em làm đúng 18 câu ở Start thì được 18 * 2 = 36 điểm.</td>
+          </tr>
+          <tr>
+            <td>Joey/Wallaby/Grey/Red: chỉ chấm 40 câu đầu</td>
+            <td>Em làm đến câu 45 thì chỉ tính 40 câu đầu tiên em đã làm. 5 câu sau không tính điểm.</td>
+          </tr>
+          <tr>
+            <td>Joey ví dụ</td>
+            <td>Trong 40 câu đầu: đúng 20, sai 10, bỏ 10. Điểm = 20 * 1 - 10 * 0.5 + 10 (điểm cộng) = 25 điểm.</td>
+          </tr>
+          <tr>
+            <td>Wallaby ví dụ</td>
+            <td>Đúng 24, sai 8, bỏ 8. Điểm = 24 * 1.25 - 8 * 0.5 + 10 = 30 + 10 - 4 = 36 điểm.</td>
+          </tr>
+          <tr>
+            <td>Grey ví dụ</td>
+            <td>Đúng 30, sai 5, bỏ 5. Điểm = 30 * 1.5 - 5 * 0.5 + 10 = 45 - 2.5 + 10 = 52.5 điểm.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">Ghi chú: tài liệu không nói rõ điểm tối thiểu. Nếu cần quy ước, nên lấy điểm thấp nhất là 0.</p>
+    </section>
+
+    <footer>
+      Bản tóm tắt phục vụ kiểm tra logic chấm điểm. Tệp nguồn: English Kangaroo Regulations for Country Partners.pdf
+    </footer>
+  </div>
+</body>
+</html>
