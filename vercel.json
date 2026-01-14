@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/iklc_scoring_summary.html" }
+  ],
+  "cleanUrls": true
+}
