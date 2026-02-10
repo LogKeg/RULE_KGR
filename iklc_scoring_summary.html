@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tóm tắt cách tính điểm IKLC</title>
+  <title>Tóm tắt cách tính điểm KGR</title>
   <style>
     :root {
       --bg: #f6f4ef;
@@ -12,6 +12,10 @@
       --muted: #5a5a5a;
       --accent: #1f6b5c;
       --line: #e2ded6;
+      --sidebar-width: 200px;
+    }
+    * {
+      box-sizing: border-box;
     }
     body {
       margin: 0;
@@ -19,10 +23,50 @@
       color: var(--text);
       background: var(--bg);
     }
-    .wrap {
-      max-width: 980px;
-      margin: 32px auto 48px;
-      padding: 0 20px;
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--card);
+      border-right: 1px solid var(--line);
+      padding: 20px 0;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .sidebar h2 {
+      margin: 0 20px 16px;
+      font-size: 14px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .sidebar-item {
+      display: block;
+      padding: 12px 20px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 16px;
+      border-left: 3px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .sidebar-item:hover {
+      background: var(--bg);
+    }
+    .sidebar-item.active {
+      border-left-color: var(--accent);
+      background: var(--bg);
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .main {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      padding: 32px 40px 48px;
+      max-width: 1000px;
     }
     header {
       background: var(--card);
@@ -32,14 +76,9 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.06);
     }
     h1 {
-      margin: 0 0 8px;
+      margin: 0;
       font-size: 28px;
       letter-spacing: 0.2px;
-    }
-    .sub {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
     }
     .section {
       margin-top: 20px;
@@ -91,153 +130,319 @@
       display: block;
       margin-bottom: 6px;
     }
-    footer {
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 13px;
+    .content-panel {
+      display: none;
+    }
+    .content-panel.active {
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        display: flex;
+        padding: 10px;
+        gap: 10px;
+      }
+      .sidebar h2 {
+        display: none;
+      }
+      .sidebar-item {
+        padding: 10px 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        border-left: 1px solid var(--line);
+      }
+      .sidebar-item.active {
+        border-color: var(--accent);
+        border-left-color: var(--accent);
+      }
+      .layout {
+        flex-direction: column;
+      }
+      .main {
+        margin-left: 0;
+        padding: 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <h1>IKLC English – Tóm tắt cách tính điểm</h1>
-    </header>
+  <div class="layout">
+    <nav class="sidebar">
+      <h2>Cuộc thi</h2>
+      <a class="sidebar-item active" onclick="showPanel('iklc')">IKLC English</a>
+      <a class="sidebar-item" onclick="showPanel('iksc')">IKSC Science</a>
+    </nav>
 
-    <section class="section">
-      <h2>Quy tắc chấm điểm (đã kiểm tra)</h2>
-      <div class="logic">
-        <div class="logic-card">
-          <strong>PreEcolier &amp; Ecolier</strong>
-          Không trừ điểm khi sai. Tính điểm tất cả câu.
-        </div>
-        <div class="logic-card">
-          <strong>Benjamin, Cadet, Junior, Student</strong>
-          Có 50 câu, chỉ chấm 40 câu đầu tiên mà thí sinh làm.
-        </div>
-        <div class="logic-card">
-          <strong>Điểm cộng cố định</strong>
-          +10 điểm chỉ áp dụng cho Benjamin/Cadet/Junior/Student.
-        </div>
-        <div class="logic-card">
-          <strong>Thời gian</strong>
-          60 phút tính từ lúc mở đề.
-        </div>
+    <main class="main">
+      <!-- IKLC Panel -->
+      <div id="iklc" class="content-panel active">
+        <header>
+          <h1>IKLC English – Tóm tắt cách tính điểm</h1>
+        </header>
+
+        <section class="section">
+          <h2>Quy tắc chấm điểm</h2>
+          <div class="logic">
+            <div class="logic-card">
+              <strong>PreEcolier &amp; Ecolier</strong>
+              Không trừ điểm khi sai. Tính điểm tất cả câu.
+            </div>
+            <div class="logic-card">
+              <strong>Benjamin, Cadet, Junior, Student</strong>
+              Có 50 câu, chỉ chấm 40 câu đầu tiên mà thí sinh làm.
+            </div>
+            <div class="logic-card">
+              <strong>Điểm cộng cố định</strong>
+              +10 điểm chỉ áp dụng cho Benjamin/Cadet/Junior/Student.
+            </div>
+            <div class="logic-card">
+              <strong>Thời gian</strong>
+              60 phút tính từ lúc mở đề.
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Bảng tính điểm theo cấp độ</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Cấp độ</th>
+                <th>Khối lớp</th>
+                <th>Số câu được chấm</th>
+                <th>Điểm / Đúng</th>
+                <th>Trừ / Sai</th>
+                <th>Điểm cộng</th>
+                <th>Điểm tối đa</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>PreEcolier</td>
+                <td>I–II</td>
+                <td>25 (tất cả)</td>
+                <td>2.00</td>
+                <td>0</td>
+                <td>Không</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>Ecolier</td>
+                <td>III–IV</td>
+                <td>30 (tất cả)</td>
+                <td>2.00</td>
+                <td>0</td>
+                <td>Không</td>
+                <td>60</td>
+              </tr>
+              <tr>
+                <td>Benjamin</td>
+                <td>V–VI</td>
+                <td>40 (từ 50 câu)</td>
+                <td>1.00</td>
+                <td>-0.50</td>
+                <td>+10</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>Cadet</td>
+                <td>VII–VIII</td>
+                <td>40 (từ 50 câu)</td>
+                <td>1.25</td>
+                <td>-0.50</td>
+                <td>+10</td>
+                <td>60</td>
+              </tr>
+              <tr>
+                <td>Junior</td>
+                <td>IX–X</td>
+                <td>40 (từ 50 câu)</td>
+                <td>1.50</td>
+                <td>-0.50</td>
+                <td>+10</td>
+                <td>70</td>
+              </tr>
+              <tr>
+                <td>Student</td>
+                <td>XI–XII</td>
+                <td>40 (từ 50 câu)</td>
+                <td>1.75</td>
+                <td>-0.50</td>
+                <td>+10</td>
+                <td>80</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="section">
+          <h2>Ví dụ tính điểm</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Cấp độ</th>
+                <th>Ví dụ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>PreEcolier/Ecolier</td>
+                <td>Không bị trừ điểm khi sai. Đúng 18 câu ở PreEcolier = 18 × 2 = 36 điểm.</td>
+              </tr>
+              <tr>
+                <td>Benjamin</td>
+                <td>Đúng 20, sai 10, bỏ 10. Điểm = 20 × 1 - 10 × 0.5 + 10 = 25 điểm.</td>
+              </tr>
+              <tr>
+                <td>Cadet</td>
+                <td>Đúng 24, sai 8, bỏ 8. Điểm = 24 × 1.25 - 8 × 0.5 + 10 = 36 điểm.</td>
+              </tr>
+              <tr>
+                <td>Junior</td>
+                <td>Đúng 30, sai 5, bỏ 5. Điểm = 30 × 1.5 - 5 × 0.5 + 10 = 52.5 điểm.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
       </div>
-    </section>
 
-    <section class="section">
-      <h2>Bảng tính điểm theo cấp độ</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Cấp độ</th>
-            <th>Khối lớp</th>
-            <th>Số câu được chấm</th>
-            <th>Điểm / Đúng</th>
-            <th>Trừ / Sai</th>
-            <th>Điểm cộng</th>
-            <th>Điểm tối đa (kiểm tra)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>PreEcolier (Pre-A1)</td>
-            <td>I–II</td>
-            <td>25 (tất cả)</td>
-            <td>2.00</td>
-            <td>0</td>
-            <td>Không</td>
-            <td>25 * 2 = 50</td>
-          </tr>
-          <tr>
-            <td>Ecolier (A1)</td>
-            <td>III–IV</td>
-            <td>30 (tất cả)</td>
-            <td>2.00</td>
-            <td>0</td>
-            <td>Không</td>
-            <td>30 * 2 = 60</td>
-          </tr>
-          <tr>
-            <td>Benjamin (A1–A2)</td>
-            <td>V–VI</td>
-            <td>40 (40 câu làm đầu tiên)</td>
-            <td>1.00</td>
-            <td>-0.50</td>
-            <td>+10</td>
-            <td>40 * 1 + 10 = 50</td>
-          </tr>
-          <tr>
-            <td>Cadet (A2–B1)</td>
-            <td>VII–VIII</td>
-            <td>40 (40 câu làm đầu tiên)</td>
-            <td>1.25</td>
-            <td>-0.50</td>
-            <td>+10</td>
-            <td>40 * 1.25 + 10 = 60</td>
-          </tr>
-          <tr>
-            <td>Junior (B1–B2)</td>
-            <td>IX–X</td>
-            <td>40 (40 câu làm đầu tiên)</td>
-            <td>1.50</td>
-            <td>-0.50</td>
-            <td>+10</td>
-            <td>40 * 1.5 + 10 = 70</td>
-          </tr>
-          <tr>
-            <td>Student (B2–C1)</td>
-            <td>XI–XII</td>
-            <td>40 (40 câu làm đầu tiên)</td>
-            <td>1.75</td>
-            <td>-0.50</td>
-            <td>+10</td>
-            <td>40 * 1.75 + 10 = 80</td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="note">Kiểm tra logic: Các điểm tối đa đều đúng theo công thức (số câu chấm * điểm đúng) + điểm cộng (nếu có).</p>
-    </section>
+      <!-- IKSC Panel -->
+      <div id="iksc" class="content-panel">
+        <header>
+          <h1>IKSC Science – Tóm tắt cách tính điểm</h1>
+        </header>
 
-    <section class="section">
-      <h2>Giải thích dễ hiểu (kèm ví dụ)</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Tình huống</th>
-            <th>Giải thích cho học sinh</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>PreEcolier/Ecolier: làm sai thì sao?</td>
-            <td>Không bị trừ điểm. Ví dụ: em làm đúng 18 câu ở PreEcolier thì được 18 * 2 = 36 điểm.</td>
-          </tr>
-          <tr>
-            <td>Benjamin/Cadet/Junior/Student: chỉ chấm 40 câu đầu</td>
-            <td>Em làm đến câu 45 thì chỉ tính 40 câu đầu tiên em đã làm. 5 câu sau không tính điểm.</td>
-          </tr>
-          <tr>
-            <td>Benjamin ví dụ</td>
-            <td>Trong 40 câu đầu: đúng 20, sai 10, bỏ 10. Điểm = 20 * 1 - 10 * 0.5 + 10 (điểm cộng) = 25 điểm.</td>
-          </tr>
-          <tr>
-            <td>Cadet ví dụ</td>
-            <td>Đúng 24, sai 8, bỏ 8. Điểm = 24 * 1.25 - 8 * 0.5 + 10 = 30 + 10 - 4 = 36 điểm.</td>
-          </tr>
-          <tr>
-            <td>Junior ví dụ</td>
-            <td>Đúng 30, sai 5, bỏ 5. Điểm = 30 * 1.5 - 5 * 0.5 + 10 = 45 - 2.5 + 10 = 52.5 điểm.</td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="note">Ghi chú: tài liệu không nói rõ điểm tối thiểu. Nếu cần quy ước, nên lấy điểm thấp nhất là 0.</p>
-    </section>
+        <section class="section">
+          <h2>Quy tắc chấm điểm</h2>
+          <div class="logic">
+            <div class="logic-card">
+              <strong>Điểm theo độ khó</strong>
+              Câu dễ: 3 điểm, Trung bình: 4 điểm, Khó: 5 điểm.
+            </div>
+            <div class="logic-card">
+              <strong>Trừ điểm khi sai</strong>
+              Mỗi câu trả lời sai trừ 1 điểm (tất cả cấp độ).
+            </div>
+            <div class="logic-card">
+              <strong>Điểm cộng ban đầu</strong>
+              Bằng số câu hỏi: 24 điểm (PreEcolier/Ecolier), 30 điểm (Benjamin/Cadet/Junior).
+            </div>
+            <div class="logic-card">
+              <strong>Thời gian</strong>
+              60 phút tính từ lúc mở đề.
+            </div>
+          </div>
+        </section>
 
-    <footer>
-      Bản tóm tắt phục vụ kiểm tra logic chấm điểm. Tệp nguồn: English Kangaroo Regulations for Country Partners.pdf
-    </footer>
+        <section class="section">
+          <h2>Bảng tính điểm theo cấp độ</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Cấp độ</th>
+                <th>Khối lớp</th>
+                <th>Số câu</th>
+                <th>Cấu trúc điểm</th>
+                <th>Trừ / Sai</th>
+                <th>Điểm cộng</th>
+                <th>Điểm tối đa</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>PreEcolier</td>
+                <td>I–II</td>
+                <td>24</td>
+                <td>8×3 + 8×4 + 8×5</td>
+                <td>-1</td>
+                <td>+24</td>
+                <td>120</td>
+              </tr>
+              <tr>
+                <td>Ecolier</td>
+                <td>III–IV</td>
+                <td>24</td>
+                <td>8×3 + 8×4 + 8×5</td>
+                <td>-1</td>
+                <td>+24</td>
+                <td>120</td>
+              </tr>
+              <tr>
+                <td>Benjamin</td>
+                <td>V–VI</td>
+                <td>30</td>
+                <td>10×3 + 10×4 + 10×5</td>
+                <td>-1</td>
+                <td>+30</td>
+                <td>150</td>
+              </tr>
+              <tr>
+                <td>Cadet</td>
+                <td>VII–VIII</td>
+                <td>30</td>
+                <td>10×3 + 10×4 + 10×5</td>
+                <td>-1</td>
+                <td>+30</td>
+                <td>150</td>
+              </tr>
+              <tr>
+                <td>Junior</td>
+                <td>IX–X</td>
+                <td>30</td>
+                <td>10×3 + 10×4 + 10×5</td>
+                <td>-1</td>
+                <td>+30</td>
+                <td>150</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="note">Điểm tối đa = (Tổng điểm các câu) + Điểm cộng ban đầu. VD: PreEcolier = (8×3 + 8×4 + 8×5) + 24 = 96 + 24 = 120.</p>
+        </section>
+
+        <section class="section">
+          <h2>Ví dụ tính điểm</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Cấp độ</th>
+                <th>Ví dụ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>PreEcolier/Ecolier</td>
+                <td>Đúng 20 câu (6 câu 3đ + 7 câu 4đ + 7 câu 5đ), sai 4 câu. Điểm = (6×3 + 7×4 + 7×5) - 4×1 + 24 = 81 - 4 + 24 = 101 điểm.</td>
+              </tr>
+              <tr>
+                <td>Benjamin/Cadet/Junior</td>
+                <td>Đúng 25 câu (8 câu 3đ + 9 câu 4đ + 8 câu 5đ), sai 5 câu. Điểm = (8×3 + 9×4 + 8×5) - 5×1 + 30 = 100 - 5 + 30 = 125 điểm.</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="note">Công thức: Điểm = (Tổng điểm câu đúng) - (Số câu sai × 1) + Điểm cộng ban đầu.</p>
+        </section>
+      </div>
+    </main>
   </div>
+
+  <script>
+    function showPanel(panelId) {
+      // Hide all panels
+      document.querySelectorAll('.content-panel').forEach(panel => {
+        panel.classList.remove('active');
+      });
+      // Remove active from all sidebar items
+      document.querySelectorAll('.sidebar-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      // Show selected panel
+      document.getElementById(panelId).classList.add('active');
+      // Add active to clicked item
+      event.target.classList.add('active');
+    }
+  </script>
 </body>
 </html>
